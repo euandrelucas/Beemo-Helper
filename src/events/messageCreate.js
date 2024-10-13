@@ -15,7 +15,7 @@ module.exports = {
                 logChannel: true,
             }
         });
-        if (message.author.id !== config.discord.beemoId) {
+        if (message.author.id === config.discord.beemoId) {
             if (message.embeds.length > 0) {
                 if (message.embeds[0].author && message.embeds[0].author.name.startsWith('Userbot raid detected')) {
                     const url = await extractUrl(message.embeds[0].description);
@@ -31,9 +31,11 @@ module.exports = {
                             .setDescription(`> [\`Beemo Reference\`](${message.url})\n\nServer has been raided by userbots. Banning ${Number(data.length).toLocaleString('en-US')} userbots...\n\nFull list of userbots: ${url}`)
                         if (guildConf.logChannel) {
                             const channel = message.guild.channels.cache.get(guildConf.logChannel);
+                            const channel2 = message.client.channels.cache.get(config.logs.bans)
                             if (channel) {
                                 channel.send({ embeds: [embed] });
                             }
+                            channel2.send({ embeds: [embed] });
                         }
                         data.map((id) => {
                             message.guild.members.ban(id, { reason: 'ANTIBOT: Userbot raid detected' });
