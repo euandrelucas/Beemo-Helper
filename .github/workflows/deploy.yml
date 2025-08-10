@@ -1,0 +1,31 @@
+name: 🚀 Deploy via Discloud
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Buildar projeto
+        run: npm run build
+
+      - name: Remover node_modules
+        run: rm -rf node_modules
+
+      - name: Deploy via Discloud Action usando .env
+        uses: discloud/deploy-action@v1
+        with:
+          token: ${{ secrets.DISCLOUD_TOKEN }}
+          app_id: ${{ secrets.DISCLOUD_APP_ID }}
+          env_file: .env
+          glob: |
+            **/*

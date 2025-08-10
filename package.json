@@ -4,7 +4,8 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "node ."
+    "start": "node .",
+    "prod": "npx prisma migrate deploy && node ."
   },
   "keywords": [],
   "author": "",
