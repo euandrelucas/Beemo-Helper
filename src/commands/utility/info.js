@@ -7,11 +7,10 @@ module.exports = {
     async execute(interaction) {
         const botCreationDate = interaction.client.user.createdAt.toLocaleDateString();
         const guildCount = interaction.client.guilds.cache.size;
-        const developer = 'André Lucas (ADG)';
+        const developer = 'André "ADG" Lucas';
         const githubLink = 'https://github.com/euandrelucas/beemo-helper';
-        const botVersion = '1.0.0';
+        const botVersion = '1.0.2';
 
-        // Cria o embed com informações do bot
         const embed = new EmbedBuilder()
             .setTitle('Bot Info')
             .setColor('Blurple')
@@ -27,7 +26,6 @@ module.exports = {
             .setFooter({ text: 'Thank you for using this bot!' })
             .setTimestamp();
 
-        // Responde à interação com o embed
         await interaction.reply({ embeds: [embed] });
     },
 };
